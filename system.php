@@ -4,14 +4,14 @@ error_reporting(E_ALL);
 
 if (!defined("TKM")) die("<pre>Нет доступа!</pre>");
 
-define('ROOT_DIR'    , dirname(__FILE__)            );
-define('CLASSES_DIR' , ROOT_DIR . '/classes'        );
-define('STYLE_DIR'   , ROOT_DIR . '/style'          );
-define('STYLE_URL'   , '/style'                     );
-define('VERSION'     , '0.3 EDITION'                      );
+define('ROOT_DIR', dirname(__FILE__));
+define('CLASSES_DIR', ROOT_DIR . '/classes');
+define('STYLE_DIR', ROOT_DIR . '/style');
+define('STYLE_URL', '/style');
+define('VERSION', '0.3 EDITION');
 
-if(!isset($_SESSION)){
-session_start();
+if (!isset($_SESSION)) {
+	session_start();
 }
 
 require(ROOT_DIR . "/config.php");
@@ -28,7 +28,8 @@ if ($config['main']['installed']) {
 	}
 }
 
-function loadTpl($file, $data = []) {
+function loadTpl($file, $data = [])
+{
 	global $config;
 	$file = STYLE_DIR . $file;
 	ob_start();
@@ -42,11 +43,13 @@ function loadTpl($file, $data = []) {
 	return ob_get_clean();
 }
 
-function TextSave($string) {
+function TextSave($string)
+{
 	return htmlspecialchars($string);
 }
 
-function MessageSend($t, $s, $u = '') {
+function MessageSend($t, $s, $u = '')
+{
 	switch ($t) {
 		case 2:
 			$class_name = 'warning';
@@ -72,58 +75,62 @@ function MessageSend($t, $s, $u = '') {
 	</div>
 END;
 
-	if ($u)	{
-		exit(header("Location: ".$u));
+	if ($u) {
+		exit(header("Location: " . $u));
 	} else {
-		if(isset($_SERVER['HTTP_REFERER'])) {
-			exit(header("Location: ".$_SERVER['HTTP_REFERER']));
+		if (isset($_SERVER['HTTP_REFERER'])) {
+			exit(header("Location: " . $_SERVER['HTTP_REFERER']));
 		} else {
 			exit(header("Location: /"));
 		}
 	}
 }
 
-function MessageShow() {
+function MessageShow()
+{
 	if (isset($_SESSION['message'])) {
 		echo $_SESSION['message'];
 		unset($_SESSION['message']);
 	}
 }
 
-function savecfg() {
+function savecfg()
+{
 	global $config;
 
 	$txt  = '<?php' . PHP_EOL;
 	$txt .= "//CMS создана разработчиком Ruslaan1!" . PHP_EOL;
-	$txt .= '$config = '.var_export($config, true).';' . PHP_EOL;
+	$txt .= '$config = ' . var_export($config, true) . ';' . PHP_EOL;
 	$txt .= '?>';
 
 	$result = file_put_contents(ROOT_DIR . "/config.php", $txt);
 
-	if($result === false) {
+	if ($result === false) {
 		return false;
 	}
 
 	return true;
 }
 
-function getIP() {
+function getIP()
+{
 	if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
 		//CloudFlare proxy Support
 		$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
 	} else {
 		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-			$ip=$_SERVER['HTTP_CLIENT_IP'];
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
 		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-			$ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 		} else {
-			$ip=$_SERVER['REMOTE_ADDR'];
+			$ip = $_SERVER['REMOTE_ADDR'];
 		}
 	}
 
 	return $ip;
 }
 
-function getTime($time) {
+function getTime($time)
+{
 	return date("d.m.Y H:i:s", $time);
 }

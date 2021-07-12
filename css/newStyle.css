@@ -10,6 +10,7 @@
 .fullscreen-bg {
     overflow: hidden;
     position: relative;
+    background: url('../video/intro_bg.jpg') center center / cover no-repeat;
 }
 
 .fullscreen-bg__video {
@@ -18,12 +19,25 @@
     left: 0;
     width: 100%;
     z-index: -100;
+    display: none;
 }
 
-.intro-title {
-    color: rgba(000, 000, 000, 1);
+.intro-title,
+.intro-text {
+    color: rgba(000, 000, 000, 1) !important;
     font-weight: bold;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.7) !important;
     padding: 10px 15px;
     border-radius: 5px;
+}
+
+/* Отключаем видео при дисплее меньше 720px */
+@media (max-width: 767px) {
+    .fullscreen-bg {
+        background: url('../video/intro_bg.jpg') center center / cover no-repeat;
+    }
+
+    .fullscreen-bg__video {
+        display: none;
+    }
 }

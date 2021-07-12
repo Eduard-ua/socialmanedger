@@ -74,11 +74,11 @@ require('lib/db.php'); ?>
 <body>
 	<?php require "header/_header.html"; ?>
 	<?php require "socialmenu/socialmenu.html"; ?>
-	<div class="intro">
+	<!-- 	<div class="intro">
 		<div class="container">
 			<?php echo MessageShow(); ?>
 		</div>
-	</div>
+	</div> -->
 	<section class="intro">
 		<div class="container">
 			<div class="intro__inner">
