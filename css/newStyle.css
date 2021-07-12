@@ -1,3 +1,21 @@
+/* Pagemenu Block */
+
+.pagemenu._container {
+    padding: 5px 25px;
+    background-color: rgba(76, 110, 244, 1);
+}
+
+.pagemenu__content {
+    padding: 5px 25px;
+    background-color: rgba(76, 110, 244, 1);
+}
+
+.content-pagemenu__list {
+    /* background-color: rgba(48, 78, 112, 0.9); */
+    background-color: rgba(76, 110, 244, 0.9);
+
+}
+
 /* Блок интро */
 
 .intro {}
@@ -10,7 +28,7 @@
 .fullscreen-bg {
     overflow: hidden;
     position: relative;
-    background: url('../video/intro_bg.jpg') center center / cover no-repeat;
+    background: url('../video/intro_bg.jpg') center center / cover no-repeat; //todo delete these point
 }
 
 .fullscreen-bg__video {
@@ -19,7 +37,7 @@
     left: 0;
     width: 100%;
     z-index: -100;
-    display: none;
+    display: none; //todo delete these point
 }
 
 .intro-title,
