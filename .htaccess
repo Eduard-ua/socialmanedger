@@ -1,0 +1,8 @@
+AddDefaultCharset UTF-8
+
+<Files ~ "^(system|config|)\.php$">
+	Deny from all
+</Files>
+ErrorDocument 404 http://%{HTTP_HOST}/error/404.html
+ErrorDocument 403 http://%{HTTP_HOST}/error/403.html
+Redirect 301 /admin /cpanel.php

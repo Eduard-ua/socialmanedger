@@ -1,0 +1,100 @@
+<style>
+.results tr[visible='false'],
+.no-result {
+display: none;
+}
+.results tr[visible='true'] {
+display: table-row;
+}
+.searchCount {
+padding: 8px;
+color: #ccc;
+}
+</style>
+<div class="card">
+	<div class="card-header">
+		<h4 class="card-title">Список социальных сетей</h4>
+	</div>
+	<div class="card-content">
+		<a href="?mode=social&do=add" class="btn btn-block btn-primary"><i class="material-icons">add</i> Добавить социальную сеть</a>
+		<div class="table-responsive">
+			<input ENGINE="text" class="searchKey" style="outline: none;padding: 0 10px;height: 45px;border: 1px solid #ccc;border-radius: 3px;font-size: 14px;color: #000;" placeholder="Что ищете?">
+			<table class="table table-striped results">
+				<thead>
+					<th>#</th>
+					<th>Название</th>
+					<th>Действие</th>
+				</thead>
+				<tbody>
+				<?php foreach($config['social'] as $key => $rows) { ?>
+					<tr>
+					<td>#<?php echo $key; ?></td>
+					<td><?php echo $rows['name']; ?></td>
+					<td class="td-actions">
+						<a href="?mode=social&do=edit&id=<?php echo $key; ?>" rel="tooltip" class="btn btn-info btn-simple" data-original-title="Просмотреть"><i class="material-icons">edit</i></a>
+						<a href="?mode=social&do=remove&id=<?php echo $key; ?>" rel="tooltip" class="btn btn-danger btn-simple" data-original-title="Удалить"><i class="material-icons">delete</i></a>
+					</td>
+				</tr>
+				<?}?>
+				<tr class="no-result">
+					<td>Совпадения не найдены</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+function createExpr(arr) {
+var index = 0;
+var expr = [":containsiAND('" + arr[0] + "')"];
+for (var i = 1; i < arr.length; i++) {
+if (arr[i] === 'AND') {
+expr[index] += ":containsiAND('" + arr[i + 1] + "')";
+i++;
+} else if (arr[i] === 'OR') {
+index++;
+expr[index] = ":containsiOR('" + arr[i + 1] + "')";
+i++;
+}
+}
+return expr;
+}
+$(document).ready(function() {
+ 
+$(".searchKey").keyup(function() {
+var searchTerm = $(".searchKey").val().replace(/["']/g, "");
+var arr = searchTerm.split(/(AND|OR)/);
+var exprs = createExpr(arr);
+var searchSplit = searchTerm.replace(/AND/g, "'):containsiAND('").replace(/OR/g, "'):containsiOR('");
+ 
+$.extend($.expr[':'], {
+'containsiAND': function(element, i, match, array) {
+return (element.textContent || element.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+}
+});
+ 
+$('.results tbody tr').attr('visible', 'false');
+for (var expr in exprs) {
+$(".results tbody tr" + exprs[expr]).each(function(e) {
+$(this).attr('visible', 'true');
+});
+}
+ 
+var searchCount = $('.results tbody tr[visible="true"]').length;
+ 
+$('.searchCount').text('Найдено ' + searchCount + ' страниц');
+if (searchCount == '0') {
+$('.no-result').show();
+} else {
+$('.no-result').hide();
+}
+if ($('.searchKey').val().length == 0) {
+$('.searchCount').hide();
+} else {
+$('.searchCount').show();
+}
+});
+});
+</script>

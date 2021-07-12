@@ -1,0 +1,46 @@
+<style>
+    .icon-menu {
+        z-index: 6;
+    }
+    .menu-header__body._active {
+        z-index: 5;
+    }
+</style>
+	<header class="header">
+	<div class="header__content _container">
+		<div class="header__logo">
+			<a href="https://socialmanedger.ru"><picture><source srcset="https://socialmanedger.ru/images/menu/quattrologo.webp" type="image/webp"><picture><source srcset="https://socialmanedger.ru/images/menu/quattrologo.webp" type="image/webp"><img class="header__logo" src="https://socialmanedger.ru/images/menu/quattrologo.png" alt="логотип"></picture></picture></a>
+		</div>
+		<div class="header__menu menu-header">
+			<div class="icon-menu">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<nav class="menu-header__body">
+				<ul class="menu-header__ul">
+					<li class="menu-header__li"><a href="https://socialmanedger.ru"><span><picture><source srcset="https://socialmanedger.ru/images/menu/hom.webp" type="image/webp"><picture><source srcset="https://socialmanedger.ru/images/menu/hom.webp" type="image/webp"><img class="menu-header__img" src="https://socialmanedger.ru/images/menu/hom.png" alt=""></picture></picture></span><p>Главная</p></a></li>
+					<li class="menu-header__li"><a href="/uslugi"><span><picture><source srcset="https://socialmanedger.ru/images/menu/i.webp" type="image/webp"><picture><source srcset="https://socialmanedger.ru/images/menu/i.webp" type="image/webp"><img class="menu-header__img" src="https://socialmanedger.ru/images/menu/i.png" alt=""></picture></picture></span>Услуги</a></li>
+					<li class="menu-header__li"><a href="/cabinet/support"><span><picture><source srcset="https://socialmanedger.ru/images/menu/tech.webp" type="image/webp"><picture><source srcset="https://socialmanedger.ru/images/menu/tech.webp" type="image/webp"><img class="menu-header__img" src="https://socialmanedger.ru/images/menu/tech.png" alt=""></picture></picture></span>Техподдержка</a></li>
+					<li class="menu-header__li"><a href="/reviews"><span><picture><source srcset="https://socialmanedger.ru/images/menu/contact.webp" type="image/webp"><picture><source srcset="https://socialmanedger.ru/images/menu/contact.webp" type="image/webp"><img class="menu-header__img" src="https://socialmanedger.ru/images/menu/contact.png" alt=""></picture></picture></span>Отзывы</a></li>
+					<li class="menu-header__li"><a href="/about"><span><picture><source srcset="https://socialmanedger.ru/images/menu/info.webp" type="image/webp"><picture><source srcset="https://socialmanedger.ru/images/menu/info.webp" type="image/webp"><img class="menu-header__img" src="https://socialmanedger.ru/images/menu/info.png" alt=""></picture></picture></span>О нас</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="header__action menu-action">
+		    <?php if(isset($_SESSION['logged_user'])) {
+ 						$a = $link->query("SELECT * FROM `users` WHERE `login` = '".$_SESSION['logged_user']->login."'");
+ 						$b = $a->fetch(); ?>
+ 						<div class="registrations"><a class="reg" href="/cabinet"><?php echo $_SESSION['logged_user']->login; ?> </a> <a class="login" style="display: flex;"><p style="display: flex; margin-right: 5px"><?php echo $b['balance']; ?></p><p>Р</p></a></div>
+ 					<?php } else { ?>
+ 					<ul class="menu-action__ul">
+        				<li class="menu-action__img"><span class="menu-action__span"></span></li> 
+        				<li class="menu-action__li"><a href="/login"><span>Вход</span></a></li> 
+        				<li class="menu-action__li"><a class="menu-action__reg" href="/registration"><p>Регистрация</p></a></li> 
+        			</ul>
+                     <!--<div class="registrations"><i class="fa fa-paper-plane" aria-hidden="true"></i> <a class="reg" href="/registration">Регистрация </a> <a class="login" href="/login"> / Вход</a> </div>-->
+                 <?php } ?>
+			
+		</div>
+	</div>
+</header>

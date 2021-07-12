@@ -1,0 +1,16 @@
+<tr>
+	<td><?php echo $data['id']; ?></td>
+	<td><?php echo $data['login']; ?></td>
+	<td><?php echo $data['email']; ?></td>
+	<td><?php echo $data['usluga']; ?></td>
+	<td><?php echo $data['url']; ?></td>
+	<td><?php echo $data['number']; ?></td>
+	<td><?php echo $data['status']; ?></td>
+	<td><?php echo $data['cost']; ?></td>
+	<td class="td-actions">
+		<a href="?mode=history&do=ok&id=<?php echo $data['id']; ?>" rel="tooltip" title="" class="btn btn-info btn-simple" data-original-title="Изменить статус на <<Выполнено>>"><i class="material-icons">done_all</i></a>
+		<a href="?mode=history&do=none&id=<?php echo $data['id']; ?>" rel="tooltip" title="" class="btn btn-danger btn-simple" data-original-title="Изменить статус на <<Отказано>>, при нажатии пользователю возвращается сумма потраченная на заказ"><i class="material-icons">dangerous</i></a>
+		<a href="?mode=history&do=wait&id=<?php echo $data['id']; ?>" rel="tooltip" title="" class="btn btn-danger btn-simple" data-original-title="Изменить статус на <<В ожидании>>"><i class="material-icons">cached</i></a>
+		<a href="?mode=history&do=delete&id=<?php echo $data['id']; ?>" rel="tooltip" title="" class="btn btn-danger btn-simple" data-original-title="Удалить"><i class="material-icons">close</i></a>
+	</td>
+</tr>

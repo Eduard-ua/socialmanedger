@@ -1,0 +1,63 @@
+<?php if(isset($_GET['id'])) {
+	$id = $_GET['id'];
+	$links = '';
+        $ii = 0;
+
+        ob_start();
+        for ($i = 1; $i <= (count($config['social'][$id]['aray'])); $i++) {
+            include STYLE_DIR . '/admin/social/socials_id.html';
+            $ii = $i;
+        }
+        $links = ob_get_clean();
+} ?>
+<form id="goods" class="card" method="POST" data-toggle="validator">
+	<div class="card-content">
+		<form method="post">
+			<div class="form-group label-floating">
+				<label for="name" class="control-label">Название на английском</label>
+				<input type="text" id="name" name="name" class="form-control" value="<?php if(isset($_GET['id'])) { echo $config['social'][$id]['name']; } ?>" required>
+			</div>
+			<div class="form-group label-floating">
+				<label for="imgone" class="control-label">Путь к цветной картинке</label>
+				<input type="text" id="imgone" name="imgone" class="form-control" value="<?php if(isset($_GET['id'])) { echo $config['social'][$id]['imgone']; } ?>" required>
+			</div>
+			<div class="form-group label-floating">
+				<label for="imgtwo" class="control-label">Путь к бесцветной картинке</label>
+				<input type="text" id="imgtwo" name="imgtwo" class="form-control" value="<?php if(isset($_GET['id'])) { echo $config['social'][$id]['imgtwo']; } ?>" required>
+			</div>
+			<div class="form-group label-floating">
+				<textarea id="text" name="text" class="form-control" required placeholder="Загрузка редактора..."><?php if(isset($_GET['id'])) { echo $config['social'][$id]['text']; } ?></textarea>
+			</div>
+			<h3>Услуги которые входят в эту соц. сеть</h3>
+			<button class="btn btn-primary btn-block" type="button" onclick="add()"><i class="material-icons">add</i> Добавить</button>
+			<hr>
+			<div id="links" class="form-group">
+				<?php if(isset($_GET['id'])) { echo $links; } ?>
+			</div>
+			<hr>
+			<button type="submit" class="btn btn-block btn-danger"><i class="material-icons">save</i> Сохранить</button>
+		</form>
+	</div>
+</form>
+<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
+<script type="text/javascript">
+	window.onload = function () {
+		CKEDITOR.replace('text');
+	}
+</script>
+<?php $ii = 0; ?>
+<script type="text/javascript">
+var id = <?php echo $ii; ?>;
+function add() {
+	id++;
+	var clearinput = '<div class="row" id="link_'+id+'"><div class="col-xs-6 col-sm-5"><div class="form-group label-floating is-empty"><label for="links_name_'+id+'" class="control-label">Имя во множественном числе</label><input name="links_name_'+id+'" class="form-control" type="text" value="" required></div></div><div class="col-xs-6 col-sm-5"><div class="form-group label-floating is-empty"><label for="links_nametwo_'+id+'" class="control-label">Имя в одиночном числе</label><input name="links_nametwo_'+id+'" class="form-control" type="text" value="" required></div></div><div class="col-xs-6 col-sm-5"><div class="form-group label-floating is-empty"><label for="links_cost_'+id+'" class="control-label">Цена в рублях</label><input name="links_cost_'+id+'" class="form-control" type="text" value="" required></div></div><div class="col-xs-6 col-sm-5"><div class="form-group label-floating is-empty"><label for="links_costfor_'+id+'" class="control-label">Цена за сколько штук?</label><input name="links_costfor_'+id+'" class="form-control" type="text" value="" required></div></div><div class="col-xs-12 col-sm-2 text-center"><button class="btn btn-warning btn-round" type="button" onclick="removeid('+id+')"><i class="material-icons">delete</i><div class="ripple-container"></div></button></div></div>';
+	$('#links').append(clearinput);
+	$('#link_' + id).hide();
+	$('#link_' + id).fadeIn();
+}
+function removeid(blockid) {
+	if (blockid == id) { id--; }
+	$('#link_' + blockid).fadeOut(function(){$(this).remove()})
+
+}
+</script>

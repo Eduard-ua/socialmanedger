@@ -1,1 +1,29 @@
+/* Блок интро */
+
 .intro {}
+
+/* Стили для видео */
+.intro.fullscreen-bg {
+    color: rgba(000, 000, 000, 0.5)
+}
+
+.fullscreen-bg {
+    overflow: hidden;
+    position: relative;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -100;
+}
+
+.intro-title {
+    color: rgba(000, 000, 000, 1);
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 15px;
+    border-radius: 5px;
+}

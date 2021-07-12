@@ -1,0 +1,36 @@
+<form class="card" method="POST">
+	<div class="card-header">
+		<h4 class="card-title">Настройки оплаты</h4>
+	</div>
+	<div class="card-content">
+		<div class="nav-center">
+			<ul class="nav nav-pills nav-pills-warning" role="tablist">
+				<li class="active"><a href="#freekassa" data-toggle="tab">FreeKassa</a></li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<div class="tab-pane fade in active" id="freekassa">
+				<div class="form-group">
+					<div class="togglebutton">
+						<label>
+							<input type="checkbox" id="fk_enable" name="fk_enable" <?php echo ($config['merchant']['fk_enable']) ? 'checked' : '' ?>> Включить?
+						</label>
+					</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label" for="fk_shop_id">ID Магазина</label>
+					<input type="text" id="fk_shop_id" name="fk_shop_id" class="form-control" value="<?php echo $config['merchant']['fk_shop_id']; ?>">
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label" for="fk_shop_key_1">Ключ #1</label>
+					<input type="text" id="fk_shop_key_1" name="fk_shop_key_1" class="form-control" value="<?php echo $config['merchant']['fk_shop_key_1']; ?>">
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label" for="fk_shop_key_2">Ключ #2</label>
+					<input type="text" id="fk_shop_key_2" name="fk_shop_key_2" class="form-control" value="<?php echo $config['merchant']['fk_shop_key_2']; ?>">
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-block btn-danger"><i class="material-icons">save</i> Обновить</button>
+	</div>
+</form>

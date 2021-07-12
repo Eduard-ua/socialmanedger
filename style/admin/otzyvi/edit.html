@@ -1,0 +1,21 @@
+<form id="otzyvi" class="card" method="POST">
+	<div class="card-content">
+		<div class="form-group label-floating">
+			<label for="login" class="control-label">Логин</label>
+			<input type="text" class="form-control" name="login" id="login" value="<?php echo $row['login']; ?>" required="yes">
+		</div>
+		<div class="form-group label-floating">
+			<label for="city" class="control-label">Город</label>
+			<input type="text" class="form-control" name="city" id="city" value="<?php echo $row['city']; ?>">
+		</div>
+		<div class="form-group label-floating">
+			<label for="rate" class="control-label">Оценка</label>
+			<input type="text" class="form-control" name="rate" id="rate" value="<?php echo $row['rate']; ?>">
+		</div>
+		<div class="form-group label-floating">
+			<label for="text" class="control-label">Комментарий</label>
+			<input type="text" class="form-control" name="text" id="text" value="<?php echo $row['text']; ?>">
+		</div>
+		<button class="btn btn-block btn-danger"><i class="material-icons">save</i> Обновить</button>
+	</div>
+</form>
